@@ -11,6 +11,22 @@ const SetForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
 
+  const firstNameHandler = (event) => {
+    setFirstName(event.target.value);
+  }
+
+  const secondNameHandler = (event) => {
+    setSecondName(event.target.value);
+  }
+  
+  const phoneNumberHandler = (event) => {
+    setPhoneNumber(event.target.value);
+  }
+
+  const emailHandler = (event) => {
+    setEmail(event.target.value);
+  }
+
   useEffect(() => {
     axios.get(url).then((response) => {
       setPost(response.data);
@@ -18,15 +34,10 @@ const SetForm = () => {
   }, []);
 
   function createElement() {
-    setFirstName(document.getElementById("first-date").value);
-    setSecondName(document.getElementById("second-name").value);
-    setPhoneNumber(document.getElementById("phone-number").value);
-    setEmail(document.getElementById("email").value);
-
     axios
       .post(url, {
         firstName: firstName,
-        last_ame: secondName,
+        lastName: secondName,
         phoneNumber: phoneNumber,
         email: email,
       })
@@ -45,22 +56,22 @@ const SetForm = () => {
         <form>
           <div className="div-first">
             <label>First Name</label>
-            <input type="text" id="first-name" />
+            <input onChange={firstNameHandler} type="text" id="first-name" />
           </div>
           <div className="div-second">
             <label>Second Name</label>
-            <input type="text" id="second-name" />
+            <input onChange={secondNameHandler} type="text" id="second-name" />
           </div>
           <div className="div-phone">
             <label>Phone number</label>
-            <input type="text" id="phone-number" />
+            <input onChange={phoneNumberHandler} type="text" id="phone-number" />
           </div>
           <div className="div-mail">
             <label>e-mail</label>
-            <input type="text" id="email" />
+            <input onChange={emailHandler} type="text" id="email" />
           </div>
         </form>
-        <button type="button" onClick={createElement}>
+        <button type="submit" onClick={createElement}>
           Create element
         </button>
         <br />
